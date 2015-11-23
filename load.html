@@ -1,0 +1,222 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>Load Benchmark</title>
+
+	<script type="text/javascript">
+		var events = [];
+
+		var now = function() {
+			return (new Date()).getTime();
+		};
+
+		var startTime = now();
+
+		var trackEvent = function(name) {
+			var e = { name: name, time: (now() - startTime) };
+			events.push(e);
+		};
+
+		trackEvent('Start');
+
+		window.addEventListener('DOMContentLoaded', function() {
+			trackEvent('DOM Content Loaded');
+		});
+	</script>
+
+	<script type="text/javascript">
+		var adNetworks = [
+			'admitad.com',
+			'ad.doubleclick.net',
+			'scorecardresearch.com',
+			'revsci.net',
+			'doubleclick.net',
+			'pagead2.googlesyndication.com',
+			'am15.net',
+			'myinfotopia.com',
+			'advombat.ru',
+			'partner.googleadservices.com',
+			'netseer.com',
+			'clkmon.com',
+			'hgads.com',
+			'amazon-adsystem.com',
+			'admixer.net',
+			'youlamedia.com',
+			'sociomantic.com',
+			'facetz.net',
+			'liverail.com',
+			'mgid.com',
+			'cnt.my',
+			'betweendigital.com',
+			'smartadserver.com',
+			'adshost2.com',
+			'msads.net',
+			'rtbsystem.com',
+			'adroll.com',
+			'adocean.pl',
+			'jscount.com',
+			'betrad.com'
+		];
+	</script>
+
+	<!-- Disable zoom -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<link rel="stylesheet" media="all" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	
+
+	<!-- Some test scripts -->
+	<script type="text/javascript">
+		// Generate lots of scripts
+		for (var i = 0; i < adNetworks.length; i++) {
+			var html = '<scr' + 'ipt src="//' + adNetworks[i] + '/?rand=' + i + '_scr_' + Math.random() + '"></scr' + 'ipt>';
+			document.write(html);
+		}
+	</script>
+	
+
+	<script type="text/javascript">
+		trackEvent('ScriptsLoaded');
+	</script>
+	
+	<style type="text/css">
+		.navbar-default {
+			background-color: #00bcd4;
+			border-radius: 0px;
+			border: 0px solid #00bcd4;
+		}
+		.navbar-default .navbar-brand {
+			color: #fff;
+		}
+		.navbar-default .navbar-brand:hover {
+			color: #fff;
+		}
+		.navbar-default .navbar-nav>li>a {
+			color: #fff;
+		}
+		.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:hover:active {
+			color: #fff;
+		}
+		.navbar-default .navbar-nav>li:hover, .navbar-default .navbar-nav>li:active, .navbar-default .navbar-nav>.active>a:hover {
+			color: #fff;
+			background-color: #4dd0e1;
+		}
+
+		.testFrame {
+			width: 100%;
+			height: 1024px;
+			border: 1px solid #efefef;
+			padding: 0px;
+			margin: 0px;
+		}
+
+		#iframeContainer {
+			margin-top: 100px;
+		}
+
+		#benchmarkResult {
+			margin-top: 30px;
+		}
+
+		#statusContainer {
+			margin-top: 15px;
+		}
+
+		.navbar-default .navbar-nav>.active>a {
+			color: #fff;
+			background-color: #00acc1;
+		}
+
+		.help-image {
+			border: 1px solid #efefef;
+			padding: 2px;
+			max-width: 600px;
+		}
+
+		.alert-note {
+			border-left: 4px solid #00bcd4!important;
+			border: 1px solid #efefef;
+		}
+	</style>
+
+	<script type="text/javascript">
+		var addRecord = function(name, time) {
+			var tdName = $('<td>');
+			tdName.text(name);
+			var tdTime = $('<td>');
+			tdTime.text(time);
+			var tr = $('<tr>');
+			tr.append(tdName);
+			tr.append(tdTime);
+
+			var table = $('#benchmarkResult table');
+			table.append(tr);
+		};
+
+		var renderEvents = function() {
+
+			for (var i = 0; i < events.length; i++) {
+				var e = events[i];
+				addRecord(e.name, e.time);
+			}
+		};
+
+		window.addEventListener('load', function() {
+			trackEvent('Page Loaded');
+			renderEvents();
+		});
+	</script>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1>Load Benchmark</h1>
+				<p>
+					This page is a benchmark that allows you to test content blocker influence on the page load speed.
+				</p>
+				<p>
+				</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12" id="benchmarkResult">
+				<h3>Benchmark Result</h3>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Event</th>
+							<th>Elapsed, ms</th>
+						</tr>
+					</thead>
+					<tbody>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="row" style="visibility: hidden">
+			<script type="text/javascript">
+				// Generate lots of images
+				for (var i = 0; i < adNetworks.length; i++) {
+					var html = '<img src="//' + adNetworks[i] + '/?rand=' + i + '_img_' + Math.random() + '" />';
+					document.write(html);
+ 				}
+
+ 				// Generate lots of DOM elements
+				for (var i = 0; i < 1000; i++) {
+					var html = '<div>' + i + '</div>';
+					document.write(html);
+ 				}
+			</script>
+		</div>
+	</div>
+	<script type="text/javascript">
+		trackEvent('Body Loaded');
+	</script>
+</body>
+</html>

@@ -2,10 +2,22 @@
 <html>
   <head>
     <script type="text/javascript">
-      window.location = 'https://github.com/AdguardTeam/AdguardForWindows/releases/download/6.0.146.791/Setup.exe';
+      var downloadLink = 'https://github.com/AdguardTeam/AdguardForWindows/releases/download/6.0.146.791/Setup.exe';
+    
+      window.onload = function() {
+        var a = document.getElementById('downloadLink');
+        a.setAttribute('href', downloadLink);
+      };
+    
+      setTimeout(function() {
+        window.location = downloadLink;  
+      }, 3000);
     </script>
   </head>
   <body>
-    <h3>Downloading...</h3>
+    <h3>Download will start in 3 seconds...</h3>
+    <p>
+      <a id="downloadLink" href="http://adguard.com/">Direct link</a>
+    </p>
   </body>
 </html>

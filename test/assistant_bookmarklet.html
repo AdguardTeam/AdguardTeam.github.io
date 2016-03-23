@@ -28,18 +28,19 @@
     v = document.createElement('script');
     v.setAttribute('type', 'text/javascript');
     v.setAttribute('src', 'https://rawgit.com/AdguardTeam/AdguardBrowserExtension/master/Extension/lib/libs/balalaika.patched.js');
-    document.body.appendChild(v);
+    document.head.appendChild(v);
 
     v = document.createElement('script');
     v.setAttribute('type', 'text/javascript');
     v.setAttribute('src', 'https://rawgit.com/AdguardTeam/AdguardBrowserExtension/master/Extension/lib/libs/diff_match_patch.js');
-    document.body.appendChild(v);
+    document.head.appendChild(v);
 
     v = document.createElement('script');
     v.setAttribute('type', 'text/javascript');
     v.setAttribute('src', 'https://rawgit.com/AdguardTeam/AdguardBrowserExtension/master/Extension/lib/libs/dom.patched.js');
-    document.body.appendChild(v);
+    document.head.appendChild(v);
 
+setTimeout(function(){
     v = document.createElement('script');
     v.setAttribute('type', 'text/javascript');
     v.setAttribute('src', 'https://rawgit.com/AdguardTeam/AdguardBrowserExtension/master/Extension/lib/content-script/assistant/js/adguard-selector.js');
@@ -67,7 +68,9 @@
             console.error(ex);
         }
 
-    }, 5000);
+    }, 3000);
+    
+}, 2000);
 
 })();">drag me</a>
 </body>

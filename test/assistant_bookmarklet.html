@@ -55,7 +55,7 @@
     v.setAttribute('src', 'https://rawgit.com/AdguardTeam/AdguardForiOS/master/AdguardExtension/ActionExtension/js/adguard-assistant.js');
     document.body.appendChild(v);
 
-    startAssistant = function() {
+    var startAssistant = function() {
         if (typeof AdguardAssistant == 'undefined') {
             setTimeout(startAssistant, 500);
         }
@@ -65,7 +65,8 @@
         } catch(ex) {
             console.error(ex);
         }
-    }
+    };
+    
     startAssistant();
 
 })();">drag me</a>

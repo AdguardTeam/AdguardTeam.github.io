@@ -58,6 +58,7 @@
     var startAssistant = function() {
         if (typeof AdguardAssistant == 'undefined') {
             setTimeout(startAssistant, 500);
+            return;
         }
         s.parentNode.removeChild(s);
         try {

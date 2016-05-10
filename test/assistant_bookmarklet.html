@@ -55,21 +55,18 @@
     v.setAttribute('src', 'https://rawgit.com/AdguardTeam/AdguardForiOS/master/AdguardExtension/ActionExtension/js/adguard-assistant.js');
     document.body.appendChild(v);
 
-var startAssistant = function() {
-    if (typeof AdguardAssistant == 'undefined') {
-        setTimeout(startAssistant, 500);
-    }
-    console.log('loaded');
-    s.parentNode.removeChild(s);
+    startAssistant = function() {
+        if (typeof AdguardAssistant == 'undefined') {
+            setTimeout(startAssistant, 500);
+        }
+        s.parentNode.removeChild(s);
         try {
             AdguardAssistant.init();
-
-            console.log('initialized');
         } catch(ex) {
             console.error(ex);
         }
-}
-startAssistant();
+    }
+    startAssistant();
 
 })();">drag me</a>
 

@@ -69,16 +69,13 @@
             v.setAttribute('src', 'https://rawgit.com/AdguardTeam/AdguardForiOS/master/AdguardExtension/ActionExtension/js/adguard-assistant.js');
             document.body.appendChild(v);
 
-            console.warn('Load Assistant');
             var startAssistant = function() {
-                console.warn('StartAssistant enter');
                 if (typeof AdguardAssistant == 'undefined') {
                     setTimeout(startAssistant, 500);
                     return;
                 }
                 s.parentNode.removeChild(s);
                 try {
-                console.warn('StartAssistant init');
                     AdguardAssistant.init();
                 } catch(ex) {
                     console.error(ex);

@@ -70,12 +70,14 @@
             document.body.appendChild(v);
 
             var startAssistant = function() {
+                console.log('StartAssistant enter');
                 if (typeof AdguardAssistant == 'undefined') {
                     setTimeout(startAssistant, 500);
                     return;
                 }
                 s.parentNode.removeChild(s);
                 try {
+                console.log('StartAssistant init');
                     AdguardAssistant.init();
                 } catch(ex) {
                     console.error(ex);

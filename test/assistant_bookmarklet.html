@@ -40,37 +40,52 @@
     v.setAttribute('src', 'https://rawgit.com/AdguardTeam/AdguardBrowserExtension/master/Extension/lib/libs/dom.patched.js');
     document.head.appendChild(v);
 
-setTimeout(function(){
-    v = document.createElement('script');
-    v.setAttribute('type', 'text/javascript');
-    v.setAttribute('src', 'https://rawgit.com/AdguardTeam/AdguardBrowserExtension/feature/issues/185/Extension/lib/content-script/assistant/js/adguard-selector.js');
-    document.body.appendChild(v);
-
     v = document.createElement('script');
     v.setAttribute('type', 'text/javascript');
     v.setAttribute('src', 'https://rawgit.com/AdguardTeam/AdguardBrowserExtension/master/Extension/lib/content-script/assistant/js/adguard-rules-constructor.js');
     document.body.appendChild(v);
 
-    v = document.createElement('script');
-    v.setAttribute('type', 'text/javascript');
-    v.setAttribute('src', 'https://rawgit.com/AdguardTeam/AdguardForiOS/master/AdguardExtension/ActionExtension/js/adguard-assistant.js');
-    document.body.appendChild(v);
-
-    setTimeout(function () {
-        console.log('loaded');
-        s.parentNode.removeChild(s);
-
-        try {
-            AdguardAssistant.init();
-
-            console.log('initialized');
-        } catch(ex) {
-            console.error(ex);
+    var loadSelector = function() {
+        if (typeof balalaika == 'undefined' 
+        || typeof diff_match_patch == 'undefined' 
+        || typeof DomPredictionHelper == 'undefined' 
+        || typeof AdguardRulesConstructorLib == 'undefined') {
+            setTimeout(loadSelector, 500);
+            return;
         }
+        v = document.createElement('script');
+        v.setAttribute('type', 'text/javascript');
+        v.setAttribute('src', 'https://rawgit.com/AdguardTeam/AdguardBrowserExtension/feature/issues/185/Extension/lib/content-script/assistant/js/adguard-selector.js');
+        document.body.appendChild(v);
+        
+        var loadAssistant = function() {
+            if (typeof AdguardSelectorLib == 'undefined') {
+                setTimeout(loadAssistant, 500);
+                return;
+            }
 
-    }, 3000);
-    
-}, 2000);
+            v = document.createElement('script');
+            v.setAttribute('type', 'text/javascript');
+            v.setAttribute('src', 'https://rawgit.com/AdguardTeam/AdguardForiOS/master/AdguardExtension/ActionExtension/js/adguard-assistant.js');
+            document.body.appendChild(v);
+
+            var startAssistant = function() {
+                if (typeof AdguardAssistant == 'undefined') {
+                    setTimeout(startAssistant, 500);
+                    return;
+                }
+                s.parentNode.removeChild(s);
+                try {
+                    AdguardAssistant.init();
+                } catch(ex) {
+                    console.error(ex);
+                }
+            };
+            startAssistant();
+        };
+        loadAssistant();
+    };
+    loadSelector();
 
 })();">drag me</a>
 

@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title>Github Links</title>
+</head>
+<body>
+    <h1>Github links</h1>
+
+    <ul>
+        <li>
+            <a target="_blank" id="newIssues">
+                New Issues
+            </a>
+        </li>
+        <li>
+            <a target="_blank" id="expiredQuestions">
+                Expired Questions (no activity in 7 days)
+            </a>
+        </li>
+    </ul>
+    
+    <script type="text/javascript">
+        var dateToString = function(date) {
+            var year = date.getFullYear();
+            var month = date.getMonth()+1;
+            var day = date.getDate();
+
+            if (day < 10) {
+                day = '0' + day;
+            }
+            if (month < 10) {
+                month = '0' + month;
+            }
+
+            return year + '-' + month + '-' + day;
+        };
+
+        var searchUrl = "https://github.com/search?utf8=✓&q=";
+        var reposList = "repo:AdguardTeam/AdguardBrowserExtension repo:AdguardTeam/AdguardForiOS repo:AdguardTeam/AdguardForAndroid repo:AdguardTeam/AdguardForWindows repo:AdguardTeam/AdguardDNS repo:AdguardTeam/ContentBlocker repo:AdguardTeam/StealthMode repo:AdguardTeam/AdguardForMac repo:AdguardTeam/Userscripts repo:AdguardTeam/AdguardAssistant repo:AdguardTeam/AdguardKnowledgeBase repo:AdguardTeam/PopupBlocker repo:AdguardTeam/ExtendedCss repo:AdguardTeam/HttpsExclusions repo:AdguardTeam/CoreLibs repo:AdguardTeam/ReportsWebApp repo:AdguardTeam/FingerprintingBlocker repo:AdguardTeam/VerificationLibrary repo:AdguardTeam/LegalDocs";
+        var issues = "state:open type:issues";
+
+        var newIssuesQuery = reposList + " " + issues + " no:label created:>2017-10-20";
+        var newIssuesUrl = searchUrl + encodeURIComponent(newIssuesQuery);
+        document.querySelector('#newIssues').setAttribute('href', newIssuesUrl);
+
+        var expirationDate = new Date();
+        expirationDate.setDate(expirationDate.getDate() - 7);
+        var expiredQuestionsQuery = reposList + " " + issues + " label:question updated:<" + dateToString(expirationDate);
+        var expiredQuestionsUrl = searchUrl + encodeURIComponent(expiredQuestionsQuery);
+        document.querySelector('#expiredQuestions').setAttribute('href', expiredQuestionsUrl);
+	</script>
+</body>
+</html>

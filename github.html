@@ -18,6 +18,11 @@
                 Expired Questions (no activity in 7 days)
             </a>
         </li>
+        <li>
+            <a target="_blank" id="noLabel">
+                All issues without labels
+            </a>
+        </li>
     </ul>
     
     <script type="text/javascript">
@@ -49,6 +54,10 @@
         var expiredQuestionsQuery = reposList + " " + issues + " label:question updated:<" + dateToString(expirationDate);
         var expiredQuestionsUrl = searchUrl + encodeURIComponent(expiredQuestionsQuery);
         document.querySelector('#expiredQuestions').setAttribute('href', expiredQuestionsUrl);
+
+        var noLabelQuery = reposList + " " + issues + " no:label created:>2010-10-20";
+        var noLabelUrl = searchUrl + encodeURIComponent(noLabelQuery);
+        document.querySelector('#noLabel').setAttribute('href', noLabelUrl);
 	</script>
 </body>
 </html>

@@ -23,6 +23,11 @@
                 All issues without labels
             </a>
         </li>
+        <li>
+            <a target="_blank" id="waitingForRepro">
+                Need to test (bugs waiting for confirmation)
+            </a>
+        </li>
     </ul>
     
     <script type="text/javascript">
@@ -58,6 +63,10 @@
         var noLabelQuery = reposList + " " + issues + " no:label created:>2010-10-20";
         var noLabelUrl = searchUrl + encodeURIComponent(noLabelQuery);
         document.querySelector('#noLabel').setAttribute('href', noLabelUrl);
+
+        var waitingForReproQuery = reposList + " " + issues + ' label:"waiting for repro"';                             
+        var waitingForReproUrl = searchUrl + encodeURIComponent(waitingForReproQuery);
+        document.querySelector('#waitingForRepro').setAttribute('href', waitingForReproUrl);
 	</script>
 </body>
 </html>
